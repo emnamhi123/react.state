@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import Profile from "./Components/profile";
+import Timer from "./Components/Timer";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      fullName: "Emna Mhiri",
+      bio: "Born in 1991",
+      imageSrc: "https://cdn-icons-png.flaticon.com/512/3135/3135805.png",
+      profession: "logisticienne",
+      show: false,
+    };
+  }
+  showProfile = () => {
+    this.setState({ show: !this.state.show });
+    console.log(this.state.show);
+  };
+  render() {
+    return (
+      <div className="App">
+        {this.state.show === true ? (
+          <Profile
+            fullName={this.state.fullName}
+            desc={`${this.state.bio}, and she is a ${this.state.profession}`}
+            profileImage={this.state.imageSrc}
+          />
+        ) : (
+          " "
+        )}
+
+        <button onClick={this.showProfile}>
+          {this.state.show ? "Hide Profil" : "show Profile"}
+        </button>
+        <div style={{ margenTop: "70 px" }}>
+          <Timer />
+        </div>
+      </div>
+    );
+  }
 }
-
 export default App;
